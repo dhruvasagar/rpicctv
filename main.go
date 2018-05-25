@@ -1,10 +1,6 @@
 package main
 
 import (
-	"fmt"
-	"html"
-	"net/http"
-
 	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/api"
 )
