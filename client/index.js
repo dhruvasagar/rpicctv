@@ -1,5 +1,5 @@
 function pan(direction) {
-  let apiUrl = 'http://'+document.location.hostname+':3000/api/robots/CCTVBot/commands/pan'
+  let apiUrl = '/api/robots/CCTVBot/commands/pan'
   fetch(apiUrl, {
     mode: 'no-cors',
     method: 'POST',

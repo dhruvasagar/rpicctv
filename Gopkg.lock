@@ -26,6 +26,15 @@
   version = "v0.8.0"
 
 [[projects]]
+  name = "github.com/rakyll/statik"
+  packages = [
+    ".",
+    "fs"
+  ]
+  revision = "fd36b3595eb2ec8da4b8153b107f7ea08504899d"
+  version = "v0.1.1"
+
+[[projects]]
   branch = "master"
   name = "github.com/sigurn/crc8"
   packages = ["."]
@@ -74,6 +83,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "78c1c654bd150d5bd5a231b13d0ab5c6ba0d32b3ae0b99f0e53d0fc4f0ccf7ee"
+  inputs-digest = "854f82e4da9bf3797f4207d6efe9f87e3ec697f67f411aef4254648a99df91bd"
   solver-name = "gps-cdcl"
   solver-version = 1
