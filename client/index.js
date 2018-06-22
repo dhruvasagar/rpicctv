@@ -1,3 +1,7 @@
+window.onload = (e) => {
+  document.getElementById('camera').src = 'http://' + window.location.hostname + ':8080';
+}
+
 function pan(direction) {
   let apiUrl = '/api/robots/CCTVBot/commands/pan'
   fetch(apiUrl, {

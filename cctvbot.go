@@ -9,44 +9,40 @@ import (
 )
 
 func moveServo(servo *gpio.ServoDriver, angle uint8) {
-	if angle < 18 {
-		angle = 19
+	if angle < 11 {
+		angle = 11
 	}
-	if angle > 30 {
-		angle = 30
+	if angle > 24 {
+		angle = 24
 	}
 	servo.Move(angle)
 }
 
 func NewCCTVBot() *gobot.Robot {
 	adapter := raspi.NewAdaptor()
-	motor_pins := [4]string{
-		"7",
-		"11",
-		"16",
-		"18",
-	}
-	baseStepper := gpio.NewStepperDriver(adapter, motor_pins, gpio.StepperModes.HalfStepping, 2048)
 
-	servo := gpio.NewServoDriver(adapter, "12")
-	servo.Move(0)
+	panServo := gpio.NewServoDriver(adapter, "11")
+	tiltServo := gpio.NewServoDriver(adapter, "12")
+
+	moveServo(panServo, 0)
+	moveServo(tiltServo, 0)
 
 	robot := gobot.NewRobot("CCTVBot",
 		[]gobot.Connection{adapter},
-		[]gobot.Device{baseStepper, servo},
+		[]gobot.Device{panServo, tiltServo},
 		func() {},
 	)
 
 	robot.AddCommand("pan", func(params map[string]interface{}) interface{} {
 		switch params["direction"] {
 		case "left":
-			baseStepper.Move(100)
+			panServo.Move(panServo.CurrentAngle + 1)
 		case "right":
-			baseStepper.Move(-100)
+			panServo.Move(panServo.CurrentAngle - 1)
 		case "up":
-			moveServo(servo, servo.CurrentAngle+1)
+			moveServo(tiltServo, tiltServo.CurrentAngle-1)
 		case "down":
-			moveServo(servo, servo.CurrentAngle-1)
+			moveServo(tiltServo, tiltServo.CurrentAngle+1)
 		}
 		return fmt.Sprintf("This command pans the cctv %+v", params)
 	})
